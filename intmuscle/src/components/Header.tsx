@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Stack,
   Image,
+  useBreakpointValue,
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import { IntmaxWalletSigner } from "webmax"
@@ -41,6 +42,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 export default function Header() {
   const [address, setAddress] = useState("")
   const router = useRouter()
+  const breakpointValue = useBreakpointValue({ base: true, sm: false })
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const signer = new IntmaxWalletSigner()
@@ -63,23 +65,9 @@ export default function Header() {
     <>
       <Box bg="white" px={4} top="0" position="fixed" w="100%">
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Image src="/images/intmuscle.png" h="64px" />
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
+          <Image src="/images/intmuscle.png" h="64px" maxWidth={breakpointValue ? "230px" : "unset"} />
 
           <Flex alignItems={"center"}>
-            <HStack mr="20px" spacing={8} alignItems={"center"}>
-              <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-                {Links.map((link) => (
-                  <NavLink key={link}>{link}</NavLink>
-                ))}
-              </HStack>
-            </HStack>
             {address ? (
               <Menu>
                 <MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
@@ -90,7 +78,7 @@ export default function Header() {
                     isDisabled={!address}
                     onClick={() =>
                       router.push(
-                        `https://id.worldcoin.org/authorize?client_id=app_053d81b4723b1f158902b753977fa8bc&response_type=code%20id_token&redirect_uri=https%3A%2F%2Fintmuscle-tezu.vercel.app%2Fmuscle%2Fverify&state=${address}&nonce=${new Date().getTime()}`,
+                        `https://id.worldcoin.org/authorize?client_id=app_053d81b4723b1f158902b753977fa8bc&response_type=code%20id_token&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fmuscle%2Fverify&state=${address}&nonce=${new Date().getTime()}`,
                       )
                     }
                   >

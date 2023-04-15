@@ -10,9 +10,13 @@ import {
 
 import { Chat, ENV } from "@pushprotocol/uiweb"
 import { useRouter } from "next/router"
+import { Button, Center } from "@chakra-ui/react"
+
+import { IntmaxWalletSigner } from "webmax"
 
 const Huddle = () => {
   const { query } = useRouter()
+  const router = useRouter()
   const address = query.address as string
   const [walletAddress, setWalletAddress] = useState("")
   // replace with opponent address
@@ -22,6 +26,15 @@ const Huddle = () => {
     roomUrl: "https://iframe.huddle01.com/ncm-sjqp-zfa",
     height: "640px",
     width: "100%",
+  }
+
+  const handleDoubt = async () => {
+    const signer = new IntmaxWalletSigner()
+    const signature = await signer.signMessage(`I have a doubt!`)
+    console.log(signature)
+    if (!signature) return
+
+    router.push(`/muscle/Observe`)
   }
 
   useEffect(() => {
@@ -47,6 +60,9 @@ const Huddle = () => {
         {/* )} */}
         {/* <br /> */}
         <HuddleIframe config={iframeConfig} />
+        <Center>
+          <Button onClick={handleDoubt}>Doubt!!</Button>
+        </Center>
       </div>
     </div>
   )

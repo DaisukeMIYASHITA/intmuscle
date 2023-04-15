@@ -10,8 +10,11 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 
 export default function Card() {
+  const router = useRouter()
+
   return (
     <Center py={6}>
       <Stack
@@ -35,7 +38,9 @@ export default function Card() {
             @emily
           </Text>
           <Text pb="20px" textAlign={"center"} color={useColorModeValue("gray.700", "gray.400")} px={3}>
-            I’m Emily,living in US. I like to eat sushi. And I walk for an hour everyday. I’m now 60kg.
+            {`I’m Emily,living in US. I like to eat sushi. And I walk for an hour everyday. ${
+              router.query.id ? "" : "I’m now 60kg. And I want to be 55kg by 5/22."
+            }`}
           </Text>
         </Stack>
       </Stack>

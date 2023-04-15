@@ -38,7 +38,7 @@ const Choose = () => {
         >
           <Box>
             <Text mt="20px" px="20px">
-              4/16 60kg 　4/17 61kg　4/19 58kg　4/24 56kg→ 5/22 56kg
+              4/16 60kg 　4/17 61kg　4/19 58kg　4/24 56kg
             </Text>
             <Center my="20px" gap="10%" alignItems={"center"}>
               <Input
