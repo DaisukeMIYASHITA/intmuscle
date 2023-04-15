@@ -2,15 +2,19 @@ import Card from "@/components/Card"
 import React, { useState } from "react"
 import { Box, Center, Stack, Text, Input, Button } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import { IntmaxWalletSigner } from "webmax"
 
 const Choose = () => {
   const [deposit, setDeposit] = useState("")
   const router = useRouter()
 
   const handleDeposit = async (choise: "Yes" | "No") => {
+    const signer = new IntmaxWalletSigner()
+    const signature = await signer.signMessage(`Deposit $${deposit} to ${choise}!`)
+    console.log(signature)
+    if (!signature) return
 
-
-    router.push("/muscle/Cheer")
+    router.push(`/muscle/${choise === "Yes" ? "Cheer" : "Observe"}`)
   }
   return (
     <>

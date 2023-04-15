@@ -1,11 +1,27 @@
 import Card from "@/components/Card"
 import React, { useState } from "react"
 import { Box, Center, Stack, Text, Input, Button, Image } from "@chakra-ui/react"
-import { useRouter } from "next/router"
+import { IntmaxWalletSigner } from "webmax"
+import { useToast } from "@chakra-ui/react"
 
 const Choose = () => {
   const [message, setMessage] = useState("")
-  const router = useRouter()
+  const toast = useToast()
+
+  const handleSendCheer = async () => {
+    const signer = new IntmaxWalletSigner()
+    const signature = await signer.signMessage(`Send cheer message via Push: "${message}"!`)
+    console.log(signature)
+    if (!signature) return
+
+    toast({
+      title: "Message sent.",
+      description: `Your message has been successfully sent via Push. "${message}"`,
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    })
+  }
   return (
     <>
       <Card />
@@ -37,7 +53,7 @@ const Choose = () => {
               <Button
                 mt="20px"
                 isDisabled={!message}
-                onClick={() => router.push("/muscle/Observe")}
+                onClick={handleSendCheer}
                 leftIcon={<Image src={"/images/push.png"} h="20px" />}
               >
                 Send

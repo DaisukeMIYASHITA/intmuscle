@@ -56,7 +56,7 @@ export default function Header() {
       setAddress(account.address)
       console.log(account)
     }
-    // getAccount()
+    getAccount()
   }, [])
 
   return (
@@ -90,17 +90,13 @@ export default function Header() {
                     isDisabled={!address}
                     onClick={() =>
                       router.push(
-                        `https://id.worldcoin.org/authorize?client_id=${
-                          process.env.NEXT_PUBLIC_WORLD_COIN_CLIENT_ID
-                        }&response_type=code%20id_token&redirect_uri=${
-                          process.env.NEXT_PUBLIC_ORIGIN_PATH
-                        }%2Fmuscle%2Fverify&state=${address}&nonce=${new Date().getTime()}`,
+                        `https://id.worldcoin.org/authorize?client_id=app_053d81b4723b1f158902b753977fa8bc&response_type=code%20id_token&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fmuscle%2Fverify&state=${address}&nonce=${new Date().getTime()}`,
                       )
                     }
                   >
                     verify with World ID
                   </MenuItem>
-                  <MenuItem onClick={() => router.push("/muscle/profile")}>Profile</MenuItem>
+                  <MenuItem onClick={() => router.push(`/muscle/${address}`)}>Profile</MenuItem>
                   <MenuDivider />
                   <MenuItem>Disconnect Wallet</MenuItem>
                 </MenuList>
