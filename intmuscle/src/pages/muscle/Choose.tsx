@@ -6,6 +6,10 @@ import { useRouter } from "next/router"
 const Choose = () => {
   const [deposit, setDeposit] = useState("")
   const router = useRouter()
+
+  const handleDeposit = async (choise: "Yes" | "No") => {
+    
+  }
   return (
     <>
       <Card />
