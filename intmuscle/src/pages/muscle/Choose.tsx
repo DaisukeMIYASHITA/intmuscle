@@ -46,7 +46,7 @@ const Choose = () => {
               <Button isDisabled={!deposit} onClick={() => handleDeposit("Yes")}>
                 Yes
               </Button>
-              <Button isDisabled={!deposit} onClick={() => router.push("/muscle/Observe")}>
+              <Button isDisabled={!deposit} onClick={() => handleDeposit("No")}>
                 No
               </Button>
             </Center>
