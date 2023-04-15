@@ -90,7 +90,7 @@ export default function Header() {
                     isDisabled={!address}
                     onClick={() =>
                       router.push(
-                        `https://id.worldcoin.org/authorize?client_id=app_053d81b4723b1f158902b753977fa8bc&response_type=code%20id_token&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fmuscle%2Fverify&state=${address}&nonce=${new Date().getTime()}`,
+                        `https://id.worldcoin.org/authorize?client_id=app_053d81b4723b1f158902b753977fa8bc&response_type=code%20id_token&redirect_uri=https%3A%2F%2Fintmuscle-tezu.vercel.app%2Fmuscle%2Fverify&state=${address}&nonce=${new Date().getTime()}`,
                       )
                     }
                   >
