@@ -8,7 +8,9 @@ const Choose = () => {
   const router = useRouter()
 
   const handleDeposit = async (choise: "Yes" | "No") => {
-    
+
+
+    router.push("/muscle/Cheer")
   }
   return (
     <>
@@ -41,7 +43,7 @@ const Choose = () => {
               />
             </Center>
             <Center my="20px" gap="10%">
-              <Button isDisabled={!deposit} onClick={() => router.push("/muscle/Cheer")}>
+              <Button isDisabled={!deposit} onClick={() => handleDeposit("Yes")}>
                 Yes
               </Button>
               <Button isDisabled={!deposit} onClick={() => router.push("/muscle/Observe")}>
