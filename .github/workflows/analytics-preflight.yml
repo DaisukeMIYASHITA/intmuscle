@@ -1,0 +1,38 @@
+name: Analytics preflight
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Inspect analytics and advertising setup
+        run: node scripts/analytics-preflight.mjs . --output analytics-preflight.json --markdown analytics-preflight.md --strict
+      - name: Show recommendations
+        if: always()
+        shell: bash
+        run: |
+          if [ -f analytics-preflight.md ]; then
+            cat analytics-preflight.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: analytics-preflight
+          path: |
+            analytics-preflight.json
+            analytics-preflight.md
+          if-no-files-found: ignore
